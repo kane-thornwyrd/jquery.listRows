@@ -18,7 +18,7 @@
 
       $children.remove()
 
-      for elements, key in numCols when key < iNumCols
+      for key in [0..numCols]
         $lists = $lists.add $(this).clone().each(()->
             $(this).addClass('last') if key is iNumCols - 1
             this.id = id + '-' + key if id
