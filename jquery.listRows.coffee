@@ -18,11 +18,11 @@
 
       $children.remove()
 
-      for key in [0..numCols]
+      for indice in [0..iNumCols]
         $lists = $lists.add $(this).clone().each(()->
-            $(this).addClass('last') if key is iNumCols - 1
-            this.id = id + '-' + key if id
-          ).insertAfter($lists[key-1])
+            $(this).addClass('last') if indice is iNumCols - 1
+            this.id = id + '-' + indice if id
+          ).insertAfter($lists[indice-1])
 
       for indice in [0..iNumCols]
         sliceStart = indice*thisNumRaws
