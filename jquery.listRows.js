@@ -1,34 +1,41 @@
-
-;
-
-(function(global, $, undef) {
-  if (!($ instanceof jQuery)) throw 'jQuery is missing';
-  return $.fn.listRaws = function(iNumRaws) {
+;(function(global, $, undef) {
+  return $.fn.listRows = function(iNumRows) {
     var $selection;
     $selection = $([]);
     this.each(function() {
-      var $children, $lists, iNumCols, id, indice, sliceStart, thisNumRaws, _results;
-      if (!$(this).is('ul, ol')) $selection = $selection.add(this);
-      $lists = $(this);
-      $children = $lists.children();
-      id = $lists.attr('id');
-      thisNumRaws = iNumRaws || (this.className.match(/raws(\d+)/ || []))[1] || 5;
-      iNumCols = Math.ceil($children.length / thisNumRaws);
-      if (iNumCols < 2) $selection = $selection.add(this);
-      $children.remove();
-      for (indice = 0; 0 <= iNumCols ? indice <= iNumCols : indice >= iNumCols; 0 <= iNumCols ? indice++ : indice--) {
-        $lists = $lists.add($(this).clone().each(function() {
-          if (indice === iNumCols - 1) $(this).addClass('last');
-          if (id) return this.id = id + '-' + indice;
-        }).insertAfter($lists[indice - 1]));
+      var $childs, $list, groupNum, id, indice, out, sliceStart;
+      if (!$(this).is('ul, ol')) {
+        return false;
       }
-      _results = [];
-      for (indice = 0; 0 <= iNumCols ? indice <= iNumCols : indice >= iNumCols; 0 <= iNumCols ? indice++ : indice--) {
-        sliceStart = indice * thisNumRaws;
-        _results.push($children.slice(sliceStart, sliceStart + thisNumRaws).appendTo($lists[indice]));
+      if (iNumRows <= 0) {
+        throw 'The number of rows has to be positive';
       }
-      return _results;
+      id = null;
+      if (iNumRows < 2) {
+        $selection.add(this);
+      }
+      $list = $(this);
+      $childs = $list.children();
+      iNumRows = iNumRows || (this.className.match(/raws(\d+)/) || [])[1] || 5;
+      groupNum = Math.ceil($childs.length / iNumRows);
+      out = [];
+      $childs.remove();
+      for (indice = 1; 1 <= groupNum ? indice <= groupNum : indice >= groupNum; 1 <= groupNum ? indice++ : indice--) {
+        $list = $list.add($(this).clone().each(function() {
+          if (indice === iNumRows - 1) {
+            $(this).addClass('last');
+          }
+          if (id) {
+            return this.id = "" + id + "-" + indice;
+          }
+        }).insertAfter($list[indice - 1]));
+      }
+      for (indice = 0; 0 <= groupNum ? indice <= groupNum : indice >= groupNum; 0 <= groupNum ? indice++ : indice--) {
+        sliceStart = indice * iNumRows;
+        $childs.slice(sliceStart, sliceStart + iNumRows).appendTo($list[indice]);
+      }
+      return $selection = $selection.add($list);
     });
-    return $selection = $selection.add($lists);
+    return $selection;
   };
 })(window, jQuery);

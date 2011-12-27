@@ -1,33 +1,30 @@
 ``
 ((global, $, undef)->
-  throw 'jQuery is missing' if $ not instanceof jQuery
 
-  $.fn.listRaws = (iNumRaws)->
+  $.fn.listRows = (iNumRows)->
     $selection = $ []
     @.each ()->
-      $selection = $selection.add this if not $(this).is 'ul, ol'
+      return off if not $(this).is 'ul, ol'
+      throw 'The number of rows has to be positive' if iNumRows <= 0
+      id = null
+      $selection.add this if iNumRows < 2
+      $list = $ this
+      $childs = $list.children()
+      iNumRows = iNumRows or (this.className.match(/raws(\d+)/) or [])[1] or 5
+      groupNum = Math.ceil($childs.length / iNumRows)
+      out = []
+      $childs.remove()
+      for indice in [1..groupNum]
+        $list = $list.add $(this).clone().each(()->
+          $(this).addClass 'last' if indice is iNumRows - 1
+          this.id = "#{id}-#{indice}" if id
+        ).insertAfter $list[indice-1]
+      for indice in [0..groupNum]
+        sliceStart = indice * iNumRows
+        $childs.slice(sliceStart, sliceStart + iNumRows).appendTo $list[indice]
 
-      $lists = $ this
-      $children = $lists.children()
-      id = $lists.attr 'id'
-      thisNumRaws = iNumRaws || (this.className.match /raws(\d+)/ || [])[1] || 5
-      iNumCols = Math.ceil $children.length / thisNumRaws
+      $selection = $selection.add $list
 
-      if iNumCols < 2
-        $selection = $selection.add this
-
-      $children.remove()
-
-      for indice in [0..iNumCols]
-        $lists = $lists.add $(this).clone().each(()->
-            $(this).addClass('last') if indice is iNumCols - 1
-            this.id = id + '-' + indice if id
-          ).insertAfter($lists[indice-1])
-
-      for indice in [0..iNumCols]
-        sliceStart = indice*thisNumRaws
-        $children.slice(sliceStart, sliceStart + thisNumRaws).appendTo $lists[indice]
-
-    $selection = $selection.add $lists
+    $selection
 
 )(window, jQuery)
