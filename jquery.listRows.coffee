@@ -1,23 +1,23 @@
 ``
 ((global, $, undef)->
 
-  $.fn.listRows = (iNumRows)->
+  $.fn.listRows = (Rows)->
     $selection = $ []
     @.each ()->
       return off if not $(this).is 'ul, ol'
-      throw 'The number of rows has to be positive' if iNumRows <= 0
+      throw 'The number of rows has to be positive' if Rows <= 0
       id = null
       $selection.add this if iNumRows < 2
       $list = $ this
       $childs = $list.children()
-      iNumRows = iNumRows or (this.className.match(/raws(\d+)/) or [])[1] or 5
+      iNumRows = Rows or (this.className.match(/rows-(\d+)/) or [])[1] or 5
       groupNum = Math.ceil($childs.length / iNumRows)
       out = []
       $childs.remove()
       for indice in [1..groupNum]
         $list = $list.add $(this).clone().each(()->
           $(this).addClass 'last' if indice is iNumRows - 1
-          this.id = "#{id}-#{indice}" if id
+          id = "#{id}-#{indice}" if id
         ).insertAfter $list[indice-1]
       for indice in [0..groupNum]
         sliceStart = indice * iNumRows

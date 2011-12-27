@@ -1,13 +1,13 @@
 ;(function(global, $, undef) {
-  return $.fn.listRows = function(iNumRows) {
+  return $.fn.listRows = function(Rows) {
     var $selection;
     $selection = $([]);
     this.each(function() {
-      var $childs, $list, groupNum, id, indice, out, sliceStart;
+      var $childs, $list, groupNum, iNumRows, id, indice, out, sliceStart;
       if (!$(this).is('ul, ol')) {
         return false;
       }
-      if (iNumRows <= 0) {
+      if (Rows <= 0) {
         throw 'The number of rows has to be positive';
       }
       id = null;
@@ -16,7 +16,7 @@
       }
       $list = $(this);
       $childs = $list.children();
-      iNumRows = iNumRows || (this.className.match(/raws(\d+)/) || [])[1] || 5;
+      iNumRows = Rows || (this.className.match(/rows-(\d+)/) || [])[1] || 5;
       groupNum = Math.ceil($childs.length / iNumRows);
       out = [];
       $childs.remove();
@@ -26,7 +26,7 @@
             $(this).addClass('last');
           }
           if (id) {
-            return this.id = "" + id + "-" + indice;
+            return id = "" + id + "-" + indice;
           }
         }).insertAfter($list[indice - 1]));
       }
