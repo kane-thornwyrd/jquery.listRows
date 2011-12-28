@@ -22,6 +22,10 @@
       $childs.remove();
       for (indice = 1, _ref = groupNum - 1; 1 <= _ref ? indice <= _ref : indice >= _ref; 1 <= _ref ? indice++ : indice--) {
         $list = $list.add($(this).clone().each(function() {
+          if (indice === 1) {
+            $(this).addClass('first');
+          }
+          $(this).addClass(indice % 2 === 0 ? 'even' : 'odd');
           if (indice === groupNum - 1) {
             $(this).addClass('last');
           }

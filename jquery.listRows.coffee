@@ -16,6 +16,8 @@
       $childs.remove()
       for indice in [1..groupNum - 1]
         $list = $list.add $(this).clone().each(()->
+          $(this).addClass 'first' if indice is 1
+          $(this).addClass if indice % 2 is 0 then 'even' else 'odd'
           $(this).addClass 'last' if indice is groupNum - 1
           id = "#{id}-#{indice}" if id
         ).insertAfter $list[indice-1]
