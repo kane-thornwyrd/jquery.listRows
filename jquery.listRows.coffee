@@ -14,7 +14,7 @@
       groupNum = Math.ceil($childs.length / iNumRows)
       out = []
       $childs.remove()
-      for indice in [1..groupNum]
+      for indice in [1..groupNum - 1]
         $list = $list.add $(this).clone().each(()->
           $(this).addClass 'last' if indice is groupNum - 1
           id = "#{id}-#{indice}" if id

@@ -3,7 +3,7 @@
     var $selection;
     $selection = $([]);
     this.each(function() {
-      var $childs, $list, groupNum, iNumRows, id, indice, out, sliceStart;
+      var $childs, $list, groupNum, iNumRows, id, indice, out, sliceStart, _ref;
       if (!$(this).is('ul, ol')) {
         return false;
       }
@@ -20,7 +20,7 @@
       groupNum = Math.ceil($childs.length / iNumRows);
       out = [];
       $childs.remove();
-      for (indice = 1; 1 <= groupNum ? indice <= groupNum : indice >= groupNum; 1 <= groupNum ? indice++ : indice--) {
+      for (indice = 1, _ref = groupNum - 1; 1 <= _ref ? indice <= _ref : indice >= _ref; 1 <= _ref ? indice++ : indice--) {
         $list = $list.add($(this).clone().each(function() {
           if (indice === groupNum - 1) {
             $(this).addClass('last');
