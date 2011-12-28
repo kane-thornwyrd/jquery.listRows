@@ -20,7 +20,7 @@
         classes.push if indice % 2 is 0 then 'even' else 'odd'
         classes.push 'last' if indice is groupNum - 1
         $list = $list.add $(this).clone().each(()->
-          $(this).addClass classes
+          $(this).addClass classes.join ' '
           id = "#{id}-#{indice}" if id
         ).insertAfter $list[indice-1]
       for indice in [0..groupNum]

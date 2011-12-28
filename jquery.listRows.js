@@ -30,7 +30,7 @@
           classes.push('last');
         }
         $list = $list.add($(this).clone().each(function() {
-          $(this).addClass(classes);
+          $(this).addClass(classes.join(' '));
           if (id) {
             return id = "" + id + "-" + indice;
           }
