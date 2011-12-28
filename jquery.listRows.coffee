@@ -14,7 +14,7 @@
       groupNum = Math.ceil($childs.length / iNumRows)
       out = []
       $childs.remove()
-      for indice in [0..groupNum - 1]
+      for indice in [1..groupNum - 1]
         classes = []
         classes.push 'first' if indice is 0
         classes.push if indice % 2 is 1 then 'even' else 'odd'
