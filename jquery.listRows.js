@@ -3,7 +3,7 @@
     var $selection;
     $selection = $([]);
     this.each(function() {
-      var $childs, $list, groupNum, iNumRows, id, indice, out, sliceStart, _ref;
+      var $childs, $list, classes, groupNum, iNumRows, id, indice, out, sliceStart, _ref;
       if (!$(this).is('ul, ol')) {
         return false;
       }
@@ -21,14 +21,16 @@
       out = [];
       $childs.remove();
       for (indice = 1, _ref = groupNum - 1; 1 <= _ref ? indice <= _ref : indice >= _ref; 1 <= _ref ? indice++ : indice--) {
+        classes = [];
+        if (indice === 1) {
+          classes.push('first');
+        }
+        classes.push(indice % 2 === 0 ? 'even' : 'odd');
+        if (indice === groupNum - 1) {
+          classes.push('last');
+        }
         $list = $list.add($(this).clone().each(function() {
-          if (indice === 0) {
-            $(this).addClass('first');
-          }
-          $(this).addClass(indice % 2 === 0 ? 'even' : 'odd');
-          if (indice === groupNum - 1) {
-            $(this).addClass('last');
-          }
+          $(this).addClass(classes);
           if (id) {
             return id = "" + id + "-" + indice;
           }
