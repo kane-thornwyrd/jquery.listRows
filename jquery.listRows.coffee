@@ -16,8 +16,8 @@
       $childs.remove()
       for indice in [1..groupNum - 1]
         classes = []
-        classes.push 'first' if indice is 1
-        classes.push if indice % 2 is 0 then 'even' else 'odd'
+        classes.push 'first' if indice is 0
+        classes.push if indice % 2 is 1 then 'even' else 'odd'
         classes.push 'last' if indice is groupNum - 1
         $list = $list.add $(this).clone().each(()->
           $(this).addClass classes.join ' '
