@@ -34,7 +34,7 @@
           if (id) {
             return id = "" + id + "-" + indice;
           }
-        }));
+        }).insertAfter($list[indice - 1]));
       }
       for (indice = 0; 0 <= groupNum ? indice <= groupNum : indice >= groupNum; 0 <= groupNum ? indice++ : indice--) {
         sliceStart = indice * iNumRows;

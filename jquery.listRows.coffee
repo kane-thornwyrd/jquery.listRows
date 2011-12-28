@@ -22,7 +22,7 @@
         $list = $list.add $(this).clone().each(()->
           $(this).addClass classes.join ' '
           id = "#{id}-#{indice}" if id
-        )
+        ).insertAfter $list[indice-1]
       for indice in [0..groupNum]
         sliceStart = indice * iNumRows
         $childs.slice(sliceStart, sliceStart + iNumRows).appendTo $list[indice]
