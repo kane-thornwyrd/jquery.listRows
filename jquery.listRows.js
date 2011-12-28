@@ -22,7 +22,7 @@
       $childs.remove();
       for (indice = 1; 1 <= groupNum ? indice <= groupNum : indice >= groupNum; 1 <= groupNum ? indice++ : indice--) {
         $list = $list.add($(this).clone().each(function() {
-          if (indice === iNumRows - 1) {
+          if (indice === groupNum - 1) {
             $(this).addClass('last');
           }
           if (id) {

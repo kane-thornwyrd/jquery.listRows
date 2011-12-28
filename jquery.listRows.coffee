@@ -16,7 +16,7 @@
       $childs.remove()
       for indice in [1..groupNum]
         $list = $list.add $(this).clone().each(()->
-          $(this).addClass 'last' if indice is iNumRows - 1
+          $(this).addClass 'last' if indice is groupNum - 1
           id = "#{id}-#{indice}" if id
         ).insertAfter $list[indice-1]
       for indice in [0..groupNum]
@@ -24,7 +24,6 @@
         $childs.slice(sliceStart, sliceStart + iNumRows).appendTo $list[indice]
 
       $selection = $selection.add $list
-
     $selection
 
 )(window, jQuery)
