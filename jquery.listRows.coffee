@@ -14,7 +14,7 @@
       groupNum = Math.ceil($childs.length / iNumRows)
       out = []
       $childs.remove()
-      for indice in [1..groupNum - 1]
+      for indice in [0..groupNum - 1]
         classes = []
         classes.push 'first' if indice is 0
         classes.push if indice % 2 is 1 then 'even' else 'odd'
@@ -22,7 +22,7 @@
         $list = $list.add $(this).clone().each(()->
           $(this).addClass classes.join ' '
           id = "#{id}-#{indice}" if id
-        ).insertAfter $list[indice-1]
+        )
       for indice in [0..groupNum]
         sliceStart = indice * iNumRows
         $childs.slice(sliceStart, sliceStart + iNumRows).appendTo $list[indice]

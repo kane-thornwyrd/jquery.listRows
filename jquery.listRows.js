@@ -20,7 +20,7 @@
       groupNum = Math.ceil($childs.length / iNumRows);
       out = [];
       $childs.remove();
-      for (indice = 1, _ref = groupNum - 1; 1 <= _ref ? indice <= _ref : indice >= _ref; 1 <= _ref ? indice++ : indice--) {
+      for (indice = 0, _ref = groupNum - 1; 0 <= _ref ? indice <= _ref : indice >= _ref; 0 <= _ref ? indice++ : indice--) {
         classes = [];
         if (indice === 0) {
           classes.push('first');
@@ -34,7 +34,7 @@
           if (id) {
             return id = "" + id + "-" + indice;
           }
-        }).insertAfter($list[indice - 1]));
+        }));
       }
       for (indice = 0; 0 <= groupNum ? indice <= groupNum : indice >= groupNum; 0 <= groupNum ? indice++ : indice--) {
         sliceStart = indice * iNumRows;
